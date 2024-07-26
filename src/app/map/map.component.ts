@@ -71,6 +71,21 @@ export class MapComponent implements AfterViewInit {
     map.add(featureLayer);
   }
 
- 
+  mypopup(feature: any): string {
+    // Create dynamic popup content
+    const attributes = feature.graphic.attributes;
+    const geometry = feature.graphic.geometry;
+    let content = '<b>Attributes:</b><br>';
+
+    for (const key in attributes) {
+      if (attributes.hasOwnProperty(key)) {
+        content += `${key}: ${attributes[key]}<br>`;
+      }
+    }
+
+    content += `<br><b>Geometry:</b><br>${JSON.stringify(geometry)}`;
+
+    return content;
+  }
 }
 
